@@ -4,35 +4,39 @@ import { useImmerReducer } from "use-immer";
 import {
   appStateReducer,
   AppState,
-  List,
+  Column,
   Task
 } from "./appStateReducer"
 
 import { Action } from './actions'
 
+import { DragItem } from "../DragItem";
+
 const appData: AppState = {
-  lists: [
+  draggedItem: null,
+  columns: [
     {
       id: "0",
       text: "To Do",
-      tasks: [{ id: "0", text: "Task 1 To Do" }]
+      tasks: [{ id: "00", text: "Task 1 To Do" }]
     },
     {
       id: "1",
       text: "In Progress",
-      tasks: [{ id: "0", text: "Task 1 In Progress" }]
+      tasks: [{ id: "10", text: "Task 1 In Progress" }]
     },
     {
       id: "2",
       text: "Done",
-      tasks: [{ id: "0", text: "Task 1 Done" }]
+      tasks: [{ id: "20", text: "Task 1 Done" }]
     }
   ]
 }
 
 type AppStateContextProps = {
-  lists: List[],
-  getTasksByListId(id: string): Task[],
+  draggedItem: DragItem | null,
+  columns: Column[],
+  getTasksByColumnId(id: string): Task[],
   dispatch: Dispatch<Action>,
 }
 
@@ -45,13 +49,13 @@ export const useAppState = () => {
 export const AppStateProvider: FC = ({ children }) => {
   const [state, dispatch] = useImmerReducer(appStateReducer, appData);
 
-  const { lists } = state;
-  const getTasksByListId = (id: string) => {
-    return lists.find((list) => list.id === id)?.tasks || []
+  const { draggedItem, columns } = state;
+  const getTasksByColumnId = (id: string) => {
+    return columns.find((list) => list.id === id)?.tasks || []
   }
 
   return (
-    <AppStateContext.Provider value={{ lists, getTasksByListId, dispatch }}>
+    <AppStateContext.Provider value={{ draggedItem, columns, getTasksByColumnId, dispatch }}>
       {children}
     </AppStateContext.Provider>
   )
