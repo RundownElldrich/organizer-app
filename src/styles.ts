@@ -1,9 +1,45 @@
 import styled from "styled-components";
 
+interface DragPreviewContainerProps {
+  isVisible?: boolean,
+  isPreview?: boolean,
+}
+
+export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
+  opacity: ${props => (props.isVisible ? 1 : 0)};
+  transform: ${props => (props.isPreview ? "scale(1.2)" : undefined)};
+`
+
+type DragPreviewWrapperProps = {
+  position: {
+    x: number,
+    y: number,
+  },
+}
+
+export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
+  ({ position: { x, y } }) => ({
+    style: {
+      transform: `translate(${x}px, ${y}px)`
+    }
+  })
+)<DragPreviewWrapperProps>``
+
+export const CustomDragLayerContainer = styled.div`
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+`
+
 export const AppContainer = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
   // wip styling
@@ -11,8 +47,9 @@ export const AppContainer = styled.div`
   padding: 20px;
 `
 
-export const ColumnContainer = styled.div`
-  flex-grow: 0;
+export const ColumnContainer = styled(DragPreviewContainer)`
+  // flex-grow: 0;
+  width: 24rem;
   // wip styling
   border: 1px solid black;
   padding: 20px;
@@ -25,7 +62,7 @@ export const ColumnTitle = styled.div`
   padding: 20px;
 `
 
-export const CardContainer = styled.div`
+export const TaskContainer = styled(DragPreviewContainer)`
   // wip styling
   border: 1px solid black;
   padding: 20px;

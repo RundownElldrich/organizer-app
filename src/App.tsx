@@ -2,20 +2,22 @@ import React from "react";
 
 import { AddNewItem } from "./AddNewItem"
 import { Column } from './Column';
+import { CustomDragLayer } from "./CustomDragLayer";
 
 import { useAppState } from "./state/AppStateContext";
-import { addList } from "./state/actions";
+import { addColumn } from "./state/actions";
 
 import {
   AppContainer,
 } from './styles';
 
 export const App = () => {
-  const { lists, dispatch } = useAppState()
+  const { columns, dispatch } = useAppState()
 
   return (
     <AppContainer>
-      {lists.map(list => (
+      <CustomDragLayer />
+      {columns.map(list => (
         <Column
           id={list.id}
           key={list.id}
@@ -24,7 +26,7 @@ export const App = () => {
       ))}
       <AddNewItem
         toggleButtonText="+ Add another list"
-        onAddItem={text => dispatch(addList(text))}
+        onAddItem={text => dispatch(addColumn(text))}
       />
     </AppContainer>
   )
