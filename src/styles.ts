@@ -1,29 +1,29 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-interface DragPreviewContainerProps {
-  isVisible?: boolean,
-  isPreview?: boolean,
+type DragPreviewContainerProps = {
+  isVisible?: boolean;
+  isPreview?: boolean;
 }
 
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transform: ${props => (props.isPreview ? "scale(1.2)" : undefined)};
-`
+  transform: ${props => (props.isPreview ? 'scale(1.2)' : undefined)};
+`;
 
 type DragPreviewWrapperProps = {
   position: {
-    x: number,
-    y: number,
-  },
+    x: number;
+    y: number;
+  };
 }
 
 export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
-  ({ position: { x, y } }) => ({
-    style: {
-      transform: `translate(${x}px, ${y}px)`
-    }
-  })
-)<DragPreviewWrapperProps>``
+	({position: {x, y}}) => ({
+		style: {
+			transform: `translate(${x}px, ${y}px)`,
+		},
+	}),
+)<DragPreviewWrapperProps>``;
 
 export const CustomDragLayerContainer = styled.div`
   height: 100%;
@@ -33,7 +33,7 @@ export const CustomDragLayerContainer = styled.div`
   top: 0;
   width: 100%;
   z-index: 100;
-`
+`;
 
 export const AppContainer = styled.div`
   align-items: flex-start;
@@ -45,7 +45,7 @@ export const AppContainer = styled.div`
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const ColumnContainer = styled(DragPreviewContainer)`
   // flex-grow: 0;
@@ -53,20 +53,20 @@ export const ColumnContainer = styled(DragPreviewContainer)`
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const ColumnTitle = styled.div`
   // wip styling
   color: crimson;
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const TaskContainer = styled(DragPreviewContainer)`
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const AddItemButton = styled.button`
   // wip styling
@@ -75,7 +75,7 @@ export const AddItemButton = styled.button`
   &:hover {
     border-color: yellowgreen;
   }
-`
+`;
 
 export const NewItemFormContainer = styled.div`
   display: flex;
@@ -85,17 +85,17 @@ export const NewItemFormContainer = styled.div`
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const NewItemInput = styled.input`
   width: 100%;
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
 
 export const NewItemButton = styled.button`
   // wip styling
   border: 1px solid black;
   padding: 20px;
-`
+`;
