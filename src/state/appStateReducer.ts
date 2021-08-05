@@ -1,6 +1,6 @@
 import {nanoid} from 'nanoid';
 
-import {DragItem} from '../DragItem';
+import {DragItem} from '../components/DragItem';
 
 import {Action} from './actions';
 
@@ -35,9 +35,9 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
 
 		case 'ADD_TASK': {
 			const {text, columnId} = action.payload;
-			const listIndex = findItemIndexById(draft.columns, columnId);
+			const columnIndex = findItemIndexById(draft.columns, columnId);
 
-			draft.columns[listIndex].tasks.push({
+			draft.columns[columnIndex].tasks.push({
 				id: nanoid(),
 				text,
 			});

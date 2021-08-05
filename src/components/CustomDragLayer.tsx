@@ -4,9 +4,9 @@ import {useDragLayer} from 'react-dnd';
 import {Column} from './Column';
 import {Task} from './Task';
 
-import {useAppState} from './state/AppStateContext';
+import {useAppState} from '../state/AppStateContext';
 
-import {CustomDragLayerContainer, DragPreviewWrapper} from './styles';
+import {CustomDragLayerContainer, DragPreviewWrapper} from '../styles';
 
 export const CustomDragLayer = () => {
 	const {draggedItem} = useAppState();

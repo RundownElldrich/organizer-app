@@ -1,4 +1,4 @@
-import {DragItem} from '../DragItem';
+import {DragItem} from '../components/DragItem';
 
 export function isItemDragged(
 	draggedItem: DragItem | null,

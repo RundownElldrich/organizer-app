@@ -1,4 +1,4 @@
-import {DragItem} from '../DragItem';
+import {DragItem} from '../components/DragItem';
 
 interface AddColumnAction {
   type: 'ADD_COLUMN';
@@ -60,17 +60,6 @@ export const addColumn = (
 	payload: text,
 });
 
-export const moveColumn = (
-	draggedColumnId: string,
-	dropElementId: string,
-): Action => ({
-	type: 'MOVE_COLUMN',
-	payload: {
-		draggedColumnId,
-		dropElementId,
-	},
-});
-
 export const moveTask = (
 	draggedTaskId: string,
 	dropElementId: string | null,
@@ -83,6 +72,17 @@ export const moveTask = (
 		dropElementId,
 		sourceColumnId,
 		targetColumnId,
+	},
+});
+
+export const moveColumn = (
+	draggedColumnId: string,
+	dropElementId: string,
+): Action => ({
+	type: 'MOVE_COLUMN',
+	payload: {
+		draggedColumnId,
+		dropElementId,
 	},
 });
 

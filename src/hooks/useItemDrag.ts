@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useDrag} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 
-import {DragItem} from '../DragItem';
+import {DragItem} from '../components/DragItem';
 
 import {useAppState} from '../state/AppStateContext';
 import {setDraggedItem} from '../state/actions';
