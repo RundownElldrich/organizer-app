@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import {NewItemForm} from './NewItemForm';
 
-import {AddItemButton} from './styles';
+import {AddItemButton} from '../styles';
 
 type AddNewItemProps = {
 	onAddItem(text: string): void;

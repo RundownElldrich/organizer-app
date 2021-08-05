@@ -4,14 +4,14 @@ import {useDrop} from 'react-dnd';
 import {AddNewItem} from './AddNewItem';
 import {Task} from './Task';
 
-import {addTask, moveTask, moveColumn, setDraggedItem} from './state/actions';
-import {useAppState} from './state/AppStateContext';
+import {addTask, moveTask, moveColumn, setDraggedItem} from '../state/actions';
+import {useAppState} from '../state/AppStateContext';
 
-import {useItemDrag} from './hooks/useItemDrag';
+import {useItemDrag} from '../hooks/useItemDrag';
 
-import {isItemDragged} from './utils/isItemDragged';
+import {isItemDragged} from '../utils/isItemDragged';
 
-import {ColumnContainer, ColumnTitle} from './styles';
+import {ColumnContainer, ColumnTitle} from '../styles';
 
 type ColumnProps = {
   id: string,

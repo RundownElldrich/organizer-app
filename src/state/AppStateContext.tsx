@@ -1,32 +1,35 @@
-import React, {createContext, useContext, Dispatch, PropsWithChildren, ReactNode} from 'react';
+import React, {createContext, useContext, useEffect, Dispatch, PropsWithChildren} from 'react';
 import {useImmerReducer} from 'use-immer';
 
-import {DragItem} from '../DragItem';
+import {DragItem} from '../components/DragItem';
+
+import {withInitialState} from '../hoc/withInitialState';
+
+import {save} from '../api';
 
 import {appStateReducer, AppState, Column, Task} from './appStateReducer';
-
 import {Action} from './actions';
 
-const appData: AppState = {
-	draggedItem: null,
-	columns: [
-		{
-			id: '0',
-			text: 'To Do',
-			tasks: [{id: '00', text: 'Task 1 To Do'}],
-		},
-		{
-			id: '1',
-			text: 'In Progress',
-			tasks: [{id: '10', text: 'Task 1 In Progress'}],
-		},
-		{
-			id: '2',
-			text: 'Done',
-			tasks: [{id: '20', text: 'Task 1 Done'}],
-		},
-	],
-};
+// Const appData: AppState = {
+// 	draggedItem: null,
+// 	columns: [
+// 		{
+// 			id: '0',
+// 			text: 'To Do',
+// 			tasks: [{id: '00', text: 'Task 1 To Do'}],
+// 		},
+// 		{
+// 			id: '1',
+// 			text: 'In Progress',
+// 			tasks: [{id: '10', text: 'Task 1 In Progress'}],
+// 		},
+// 		{
+// 			id: '2',
+// 			text: 'Done',
+// 			tasks: [{id: '20', text: 'Task 1 Done'}],
+// 		},
+// 	],
+// };
 
 type AppStateContextProps = {
   draggedItem: DragItem | null;
@@ -35,26 +38,25 @@ type AppStateContextProps = {
   dispatch: Dispatch<Action>;
 }
 
-// Type AppStateProviderProps = {
-//  children: React.ReactNode;
-// }
-
 const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps);
 
 export const useAppState = () => useContext(AppStateContext);
 
-// Const MyComponent = ({children}: PropsWithChildren<{}>)
+type AppStateProviderProps = PropsWithChildren<{ initialState: AppState }>;
 
-export const AppStateProvider = ({children}: PropsWithChildren<ReactNode>) => {
-// Export const AppStateProvider: FC<AppStateProviderProps> = ({children}) => {
-	const [state, dispatch] = useImmerReducer(appStateReducer, appData);
+export const AppStateProvider = withInitialState<AppStateProviderProps>(({children, initialState}) => {
+	const [state, dispatch] = useImmerReducer(appStateReducer, initialState);
+
+	useEffect(() => {
+		save(state);
+	}, [state]);
 
 	const {draggedItem, columns} = state;
-	const getTasksByColumnId = (id: string) => columns.find(list => list.id === id)?.tasks || [];
+	const getTasksByColumnId = (id: string) => columns.find((column: Column) => column.id === id)?.tasks || [];
 
 	return (
 		<AppStateContext.Provider value={{draggedItem, columns, getTasksByColumnId, dispatch}}>
 			{children}
 		</AppStateContext.Provider>
 	);
-};
+});

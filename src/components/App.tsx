@@ -4,10 +4,10 @@ import {AddNewItem} from './AddNewItem';
 import {Column} from './Column';
 import {CustomDragLayer} from './CustomDragLayer';
 
-import {useAppState} from './state/AppStateContext';
-import {addColumn} from './state/actions';
+import {useAppState} from '../state/AppStateContext';
+import {addColumn} from '../state/actions';
 
-import {AppContainer} from './styles';
+import {AppContainer} from '../styles';
 
 export const App = () => {
 	const {columns, dispatch} = useAppState();
@@ -15,15 +15,15 @@ export const App = () => {
 	return (
 		<AppContainer>
 			<CustomDragLayer />
-			{columns.map(list => (
+			{columns.map(column => (
 				<Column
-					id={list.id}
-					key={list.id}
-					text={list.text}
+					id={column.id}
+					key={column.id}
+					text={column.text}
 				/>
 			))}
 			<AddNewItem
-				toggleButtonText="+ Add another list"
+				toggleButtonText="+ Add another column"
 				onAddItem={text => dispatch(addColumn(text))}
 			/>
 		</AppContainer>

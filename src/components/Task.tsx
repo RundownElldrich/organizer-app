@@ -1,14 +1,14 @@
 import React, {useRef} from 'react';
 import {useDrop} from 'react-dnd';
 
-import {moveTask} from './state/actions';
-import {useAppState} from './state/AppStateContext';
+import {moveTask} from '../state/actions';
+import {useAppState} from '../state/AppStateContext';
 
-import {useItemDrag} from './hooks/useItemDrag';
+import {useItemDrag} from '../hooks/useItemDrag';
 
-import {isItemDragged} from './utils/isItemDragged';
+import {isItemDragged} from '../utils/isItemDragged';
 
-import {TaskContainer} from './styles';
+import {TaskContainer} from '../styles';
 
 type TaskProps = {
   id: string,
