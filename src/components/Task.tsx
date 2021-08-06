@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {useDrop} from 'react-dnd';
 
-import {moveTask} from '../state/actions';
+import {moveTask, deleteTask} from '../state/actions';
 import {useAppState} from '../state/AppStateContext';
 
 import {useItemDrag} from '../hooks/useItemDrag';
@@ -57,6 +57,9 @@ export const Task = ({text, id, columnId, isPreview}: TaskProps) => {
 			isPreview={isPreview}
 			ref={ref}
 		>
+			<button onClick={() => dispatch(deleteTask(columnId, id))}>
+				delete
+			</button>
 			{text}
 		</TaskContainer>
 	);

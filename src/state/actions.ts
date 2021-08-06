@@ -36,10 +36,25 @@ interface SetDraggedItemAction {
   payload: DragItem | null,
 }
 
+interface DeleteColumnAction {
+  type: 'DELETE_COLUMN';
+  payload: string;
+}
+
+interface DeleteTaskAction {
+  type: 'DELETE_TASK';
+  payload: {
+    columnId: string;
+    taskId: string;
+  };
+}
+
 export type Action = AddColumnAction
   | AddTaskAction
   | MoveColumnAction
   | MoveTaskAction
+  | DeleteColumnAction
+  | DeleteTaskAction
   | SetDraggedItemAction;
 
 export const addTask = (
@@ -83,6 +98,22 @@ export const moveColumn = (
 	payload: {
 		draggedColumnId,
 		dropElementId,
+	},
+});
+
+export const deleteColumn = (columnId: string): Action => ({
+	type: 'DELETE_COLUMN',
+	payload: columnId,
+});
+
+export const deleteTask = (
+	columnId: string,
+	taskId: string,
+): Action => ({
+	type: 'DELETE_TASK',
+	payload: {
+		columnId,
+		taskId,
 	},
 });
 

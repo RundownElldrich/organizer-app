@@ -4,7 +4,7 @@ import {useDrop} from 'react-dnd';
 import {AddNewItem} from './AddNewItem';
 import {Task} from './Task';
 
-import {addTask, moveTask, moveColumn, setDraggedItem} from '../state/actions';
+import {addTask, moveTask, moveColumn, deleteColumn, setDraggedItem} from '../state/actions';
 import {useAppState} from '../state/AppStateContext';
 
 import {useItemDrag} from '../hooks/useItemDrag';
@@ -71,6 +71,9 @@ export const Column = ({id, text, isPreview}: ColumnProps) => {
 			isPreview={isPreview}
 		>
 			<ColumnTitle>{text}</ColumnTitle>
+			<button onClick={() => dispatch(deleteColumn(id))}>
+				delete
+			</button>
 			{tasks.map(task => (
 				<Task
 					key={task.id}
