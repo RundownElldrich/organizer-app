@@ -35,8 +35,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node --loader ts-node/esm ./server.ts",
-    "dev": "yarn install && yarn start-all",
-    "start-all": "concurrently \" yarn server\" \"yarn start\""
+    "start-all": "concurrently \" yarn server\" \"yarn start\"",
+    "dev": "yarn install && yarn start-all"
   },
   "browserslist": {
     "production": [
