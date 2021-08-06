@@ -86,6 +86,22 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
 			break;
 		}
 
+		case 'DELETE_COLUMN': {
+			const columnId = action.payload;
+			const columnIndex = findItemIndexById(draft.columns, columnId);
+			draft.columns.splice(columnIndex, 1);
+			break;
+		}
+
+		case 'DELETE_TASK': {
+			const {columnId, taskId} = action.payload;
+			const columnIndex = findItemIndexById(draft.columns, columnId);
+			const taskIndex = findItemIndexById(draft.columns[columnIndex].tasks, taskId);
+
+			draft.columns[columnIndex].tasks.splice(taskIndex, 1);
+			break;
+		}
+
 		case 'SET_DRAGGED_ITEM': {
 			draft.draggedItem = action.payload;
 			break;
