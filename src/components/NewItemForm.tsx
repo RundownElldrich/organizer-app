@@ -6,10 +6,11 @@ import {NewItemFormContainer, NewItemButton, NewItemInput} from '../styles';
 
 type NewItemFormProps = {
   onAddItem(text: string): void;
+	onCancel(): void;
 }
 
-export const NewItemForm = ({onAddItem}: NewItemFormProps) => {
-	const [text, setText] = useState('');
+export const NewItemForm = ({onAddItem, onCancel}: NewItemFormProps) => {
+	const [text, setText] = useState<string>('');
 	const inputRef = useFocus();
 
 	const handleAddText = (
@@ -31,6 +32,10 @@ export const NewItemForm = ({onAddItem}: NewItemFormProps) => {
 			<NewItemButton onClick={() => onAddItem(text)}>
         Create
 			</NewItemButton>
+			<NewItemButton onClick={() => onCancel()}>
+        Cancel
+			</NewItemButton>
+
 		</NewItemFormContainer>
 	);
 };

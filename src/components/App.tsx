@@ -15,6 +15,11 @@ export const App = () => {
 	return (
 		<AppContainer>
 			<CustomDragLayer />
+			<AddNewItem
+				buttonLabel="add column"
+				onAddItem={text => dispatch(addColumn(text))}
+				isColumn
+			/>
 			{columns.map(column => (
 				<Column
 					id={column.id}
@@ -22,10 +27,6 @@ export const App = () => {
 					text={column.text}
 				/>
 			))}
-			<AddNewItem
-				toggleButtonText="+ Add another column"
-				onAddItem={text => dispatch(addColumn(text))}
-			/>
 		</AppContainer>
 	);
 };

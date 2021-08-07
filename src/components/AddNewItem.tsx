@@ -1,30 +1,50 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {NewItemForm} from './NewItemForm';
 
-import {AddItemButton} from '../styles';
+import {useModal} from '../hooks/useModal';
+
+import {Modal} from './Modal';
+
+import {
+	AddColumnButton,
+	AddTaskButton,
+} from '../styles';
 
 type AddNewItemProps = {
 	onAddItem(text: string): void;
-	toggleButtonText: string;
+	buttonLabel: string;
+	isColumn?: boolean;
 }
 
 export const AddNewItem = (props: AddNewItemProps) => {
-	const [showForm, setShowForm] = useState(false);
-	const {onAddItem, toggleButtonText} = props;
-
-	if (showForm) {
-		return (
-			<NewItemForm onAddItem={text => {
-				onAddItem(text);
-				setShowForm(false);
-			}}/>
-		);
-	}
+	const {onAddItem, buttonLabel, isColumn} = props;
+	const {isShown, toggle} = useModal();
 
 	return (
-		<AddItemButton onClick={() => setShowForm(true)}>
-			{toggleButtonText}
-		</AddItemButton>
+		<>
+			<Modal
+				isShown={isShown}
+				hide={toggle}
+				modalContent={
+					<NewItemForm
+						onAddItem={text => {
+							onAddItem(text);
+							toggle();
+						}}
+						onCancel={() => toggle()}
+					/>
+				}
+			/>
+			{isColumn ? (
+				<AddColumnButton onClick={() => toggle()}>
+					{buttonLabel}
+				</AddColumnButton>
+			) : (
+				<AddTaskButton onClick={() => toggle()}>
+					{buttonLabel}
+				</AddTaskButton>
+			)}
+		</>
 	);
 };
