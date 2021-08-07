@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body,
 h1,
 h2,
@@ -29,7 +33,7 @@ ol[class] {
 
 body {
   min-block-size: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: 'IBM Plex Serif', serif;
 }
 
 img {
@@ -47,4 +51,8 @@ h6,
 li,
 figcaption {
   max-width: 60ch;
+}
+
+input, select, textarea, button{
+  font-family: inherit;
 }

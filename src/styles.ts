@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 type DragPreviewContainerProps = {
   isVisible?: boolean;
@@ -35,24 +35,63 @@ export const CustomDragLayerContainer = styled.div`
   z-index: 100;
 `;
 
+const backgroundAnimation = keyframes`
+  0%{background-position:0% 0%;}
+  50%{background-position:93% 100%;}
+  100%{background-position:0% 0%;}
+`;
+
+const isometric = `
+  transform: skewY(-4deg);
+  box-shadow: -1rem -0.5rem 2.5rem 1rem rgba(0,0,0,0.3);
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    width: 1rem;
+    height: 100%;
+    background: #d9d9d9;
+    transform-origin: right bottom;
+    transform: skewy(45deg);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background: #ededed;
+    transform-origin: bottom left;
+    transform: skewx(45deg);
+  }
+`;
+
 export const AppContainer = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
+  min-height: 100vh;
   width: 100%;
-  // wip styling
-  border: 1px solid black;
-  padding: 20px;
+  background: #ED65B7;
+  background: linear-gradient(to bottom right, #ED65B7, #7B1BAD);
+  background-size: 200% 200%;
+  animation: ${backgroundAnimation} 60s ease infinite;
 `;
 
 export const ColumnContainer = styled(DragPreviewContainer)`
-  // flex-grow: 0;
   width: 24rem;
-  // wip styling
-  border: 1px solid black;
-  padding: 20px;
+  margin:  4rem 2rem;
+  box-sizing:border-box;
+  background-color:#fff;
+  padding: 2rem;
+
+  ${isometric};
 `;
 
 export const ColumnTitle = styled.div`
@@ -68,16 +107,45 @@ export const TaskContainer = styled(DragPreviewContainer)`
   padding: 20px;
 `;
 
-export const AddItemButton = styled.button`
-  // wip styling
-  border: 1px solid black;
-  padding: 20px;
+export const AddColumnButton = styled.button`
+  position: fixed;
+  z-index: 1;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #fff;
+  border: none;
+  border-radius: .1rem;
+  box-shadow: 0 0 1.5rem -0.1rem rgba(0,0,0,0.5);
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  color: #5e5e5e;
+  font-weight: 600;
+  font-weight: bold;
+  opacity: 0.75;
+  transition: opacity 350ms;
+
   &:hover {
-    border-color: yellowgreen;
+    opacity: 1;
+  }
+`;
+
+export const AddTaskButton = styled.button`
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 1.5rem -0.1rem rgba(0,0,0,0.5);
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  color: #5e5e5e;
+  opacity: 0.75;
+  transition: opacity 350ms;
+
+  &:hover {
+    opacity: 1;
   }
 `;
 
 export const NewItemFormContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;

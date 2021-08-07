@@ -15,7 +15,7 @@ export function withInitialState<TProps>(WrappedComponent: ComponentType<PropsWi
 			columns: [],
 		});
 
-		const [isLoading, setIsLoading] = useState(true);
+		const [isLoading, setIsLoading] = useState<boolean>(true);
 		const [error, setError] = useState<Error | undefined>();
 
 		useEffect(() => {

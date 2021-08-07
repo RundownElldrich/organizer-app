@@ -83,7 +83,7 @@ export const Column = ({id, text, isPreview}: ColumnProps) => {
 				/>
 			))}
 			<AddNewItem
-				toggleButtonText="+ Add another task"
+				buttonLabel="add task"
 				onAddItem={text => dispatch(addTask(text, id))}
 			/>
 		</ColumnContainer>
